@@ -9,10 +9,10 @@
 ################################################################################
 
 from PySide2.QtCore import (QCoreApplication, QDate, QDateTime, QMetaObject,
-    QObject, QPoint, QRect, QSize, QTime, QUrl, Qt)
+                            QObject, QPoint, QRect, QSize, QTime, QUrl, Qt)
 from PySide2.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont,
-    QFontDatabase, QIcon, QKeySequence, QLinearGradient, QPalette, QPainter,
-    QPixmap, QRadialGradient)
+                           QFontDatabase, QIcon, QKeySequence, QLinearGradient, QPalette, QPainter,
+                           QPixmap, QRadialGradient)
 from PySide2.QtWidgets import *
 
 
@@ -106,7 +106,7 @@ class Ui_calculator(object):
         font.setPointSize(14)
         self.operation.setFont(font)
         self.operation.setFrame(False)
-        self.operation.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.operation.setAlignment(Qt.AlignRight | Qt.AlignTrailing | Qt.AlignVCenter)
 
         self.gridLayout.addWidget(self.operation, 0, 0, 1, 4)
 
@@ -127,7 +127,7 @@ class Ui_calculator(object):
         font1.setWeight(75)
         self.resultat.setFont(font1)
         self.resultat.setFrame(False)
-        self.resultat.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.resultat.setAlignment(Qt.AlignRight | Qt.AlignTrailing | Qt.AlignVCenter)
 
         self.gridLayout.addWidget(self.resultat, 1, 0, 1, 4)
 
@@ -315,10 +315,10 @@ class Ui_calculator(object):
 
         self.gridLayout.addWidget(self.btn_degree, 10, 0, 1, 1)
 
-
         self.retranslateUi(calculator)
 
         QMetaObject.connectSlotsByName(calculator)
+
     # setupUi
 
     def retranslateUi(self, calculator):
@@ -358,4 +358,3 @@ class Ui_calculator(object):
         self.btn_percent.setText(QCoreApplication.translate("calculator", u"%", None))
         self.btn_degree.setText(QCoreApplication.translate("calculator", u"Deg", None))
     # retranslateUi
-

@@ -38,6 +38,7 @@ class Simple_Calculator(Ui_calculator, QtWidgets.QWidget):
         self.btn_plus.clicked.connect(partial(self.btnOperationPressed, str(self.btn_plus.text())))
         self.btn_mult.clicked.connect(partial(self.btnOperationPressed, str(self.btn_mult.text())))
         self.btn_div.clicked.connect(partial(self.btnOperationPressed, str(self.btn_div.text())))
+        self.btn_point.clicked.connect(partial(self.btnOperationPressed, str(self.btn_point.text())))
         self.btn_log.clicked.connect(self.log)
         self.btn_sin.clicked.connect(self.sin)
         self.btn_cos.clicked.connect(self.cos)
@@ -52,6 +53,7 @@ class Simple_Calculator(Ui_calculator, QtWidgets.QWidget):
         self.btn_mr.clicked.connect(self.memoriesR)
         self.btn_mc.clicked.connect(self.memories)
         self.btn_mPlus.clicked.connect(self.memoriesP)
+        self.btn_mMoins.clicked.connect(self.memoriesM)
         self.btn_backspace.clicked.connect(self.buttonPressed)
 
         self.btn_equal.clicked.connect(self.calculOperation)
@@ -148,7 +150,10 @@ class Simple_Calculator(Ui_calculator, QtWidgets.QWidget):
             str(self.operation.setText(self.operation.text() + resultats))
         str(self.operation.setText(resultats))
         res = self.operation.text()
-        self.resultat.setText(str(eval(res)))
+        if resultats.endswith('%'):
+            self.resultat.setText(str(int(resultats[:-1])/100))
+        else:
+            self.resultat.setText(str(eval(res)))
 
     def puissance(self):
         get = self.resultat.text()
@@ -181,10 +186,13 @@ class Simple_Calculator(Ui_calculator, QtWidgets.QWidget):
         if state == 'sin':
             if self.btn_degree.text() != 'Deg':
                 res = str(math.sin(eval(str(math.degrees(float(eval(get)))))))
+                self.resultat.setText(res)
             else:
                 res = str(math.sin(eval(str(get))))
+                self.resultat.setText(res)
         else:
             res = str(math.asin(eval(str(get))))
+            self.resultat.setText(res)
         if res.endswith('.0'):
             self.resultat.setText(res[:-2])
         else:
@@ -254,14 +262,22 @@ class Simple_Calculator(Ui_calculator, QtWidgets.QWidget):
             self.resultat.setText(self.mem)
         else:
             self.operation.setText(self.mem + '+' + self.resultat.text())
-            self.resultat.setText(str(int(self.mem) + int(self.resultat.text())))
+            self.resultat.setText(str(float(self.mem) + float(self.resultat.text()))[:-2])
+
+    def memoriesM(self):
+        if self.resultat.text() == '':
+            self.operation.setText(self.mem)
+            self.resultat.setText(self.mem)
+        else:
+            self.operation.setText(self.mem + '-' + self.resultat.text())
+            self.resultat.setText(str(float(self.mem) - float(self.resultat.text()))[:-2])
 
     def css(self):
         self.setStyleSheet('''
         background-color: #86c2fe;
         ''')
         self.resultat.setStyleSheet('''
-        background-color: White;
+        background-color: white;
         color: sky;
         ''')
         self.operation.setStyleSheet('''
